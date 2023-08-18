@@ -5,10 +5,10 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
-  getStared(): string {
-    return 'Esto es un servicio';
+  getAll(): string {
+    return 'Traigo todos los resultados';
   }
-  getId(id) {
+  getById(id): string {
     return `Mi ID: ${id} `;
   }
 
