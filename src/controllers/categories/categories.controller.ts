@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from 'src/app.service';
 
 @Controller('categories')
@@ -9,7 +9,11 @@ export class CategoriesController {
     return this.appService.getById(id);
   }
   @Get()
-  getAllsCategories() {
-    return this.appService.getAll();
+  getAllsCategories(
+    @Query('limit') limit = 100,
+    @Query('offset') offset = 0,
+    @Query('brand') brand: string,
+  ) {
+    return this.appService.getAll(limit, offset, brand);
   }
 }

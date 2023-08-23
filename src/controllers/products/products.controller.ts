@@ -1,9 +1,17 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Post,
+  Body,
+  Put,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { AppService } from '../../app.service';
 
-// Crear: createProduct
-// Actualizar: updateProduct
-// Eliminar: deleteProduct
 @Controller('products')
 export class ProductsController {
   constructor(private readonly appService: AppService) {}
@@ -12,7 +20,32 @@ export class ProductsController {
     return this.appService.getById(id);
   }
   @Get()
-  getAllProducts() {
-    return this.appService.getAll();
+  getAllProducts(
+    @Query('limit') limit = 100,
+    @Query('offset') offset = 0,
+    @Query('brand') brand: string,
+  ) {
+    return this.appService.getAll(limit, offset, brand);
+  }
+  @Post()
+  createProduct(@Body() payload: any) {
+    return {
+      message: 'algun mensaje',
+      payload,
+    };
+  }
+
+  @Put(':id')
+  updateProduct(@Param() id: number, @Body() payload: any) {
+    return {
+      id,
+      payload,
+    };
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.ACCEPTED)
+  deleteProduct(@Param() id: number) {
+    return id;
   }
 }

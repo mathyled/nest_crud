@@ -5,9 +5,6 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
-  getAll(): string {
-    return 'Traigo todos los resultados';
-  }
   getById(id): string {
     return `Mi ID: ${id} `;
   }
@@ -16,7 +13,7 @@ export class AppService {
     return `Mi ID: ${id} y mi paramID: ${paramId}`;
   }
 
-  findAll() {
-    return `todos`;
+  getAll(limit, offset, brand): string {
+    return `limit ${limit} - offset ${offset}  -  brand${brand}`;
   }
 }
