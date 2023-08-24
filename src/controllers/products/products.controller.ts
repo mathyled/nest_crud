@@ -10,14 +10,13 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { AppService } from '../../app.service';
-
+import { ProductsService } from '../../services/products.service/products.service';
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly productService: ProductsService) {}
   @Get(':id')
   getProductById(@Param('id') id: string) {
-    return this.appService.getById(id);
+    return this.productService.getById(id);
   }
   @Get()
   getAllProducts(
@@ -25,7 +24,7 @@ export class ProductsController {
     @Query('offset') offset = 0,
     @Query('brand') brand: string,
   ) {
-    return this.appService.getAll(limit, offset, brand);
+    return this.productService.getAll(limit, offset, brand);
   }
   @Post()
   createProduct(@Body() payload: any) {
